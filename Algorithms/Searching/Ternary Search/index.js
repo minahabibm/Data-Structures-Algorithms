@@ -27,9 +27,9 @@ const arr = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
 var l = 0
 var r = 9
 var key = 5
-let result = ternarySearch(l, r, key, arr);
-result == true ? console.log("Element is not present in array" ) : console.log("Element is present at index " , result);
+let result = ternarySearch(l, r, key, arr)
+result == true ? console.log("Element is not present in array" ) : console.log("Element is present at index " , result)
 
 var key = 110
-result = ternarySearch(l, r, key, arr);
-result == false ? console.log("Element is not present in array" ) : console.log("Element is present at index " , result);
+result = ternarySearch(l, r, key, arr)
+result == false ? console.log("Element is not present in array" ) : console.log("Element is present at index " , result)
