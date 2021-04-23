@@ -1,29 +1,41 @@
-def countingSort(array):
+def countingSort(array, place):
   size = len(array)
   output = [0] * size
   count = [0] * 10
 
-  # Store the count of each elements in count array
+  # Calculate count of elements
   for i in range(0, size):
-    count[array[i]] += 1
+    index = array[i] // place
+    count[index % 10] += 1
 
-  # Store the cummulative count
+  # Calculate cummulative count
   for i in range(1, 10):
     count[i] += count[i - 1]
 
-  # Find the index of each element of the original array in count array, place the elements in output array
+  # Place the elements in sorted order
   i = size - 1
   while i >= 0:
-    output[count[array[i]] - 1] = array[i]
-    count[array[i]] -= 1
+    index = array[i] // place
+    output[count[index % 10] - 1] = array[i]
+    count[index % 10] -= 1
     i -= 1
 
-  # Copy the sorted elements into original array
   for i in range(0, size):
     array[i] = output[i]
 
 
-data = [4, 2, 2, 7, 5, 5, 1]
-countingSort(data)
-print("Sorted Array in Ascending Order: ")
+# Main function to implement radix sort
+def radixSort(array):
+  # Get maximum element
+  max_element = max(array)
+
+  # Apply counting sort to sort elements based on place value.
+  place = 1
+  while max_element // place > 0:
+    countingSort(array, place)
+    place *= 10
+
+
+data = [121, 432, 564, 23, 1, 45, 788]
+radixSort(data)
 print(data)
