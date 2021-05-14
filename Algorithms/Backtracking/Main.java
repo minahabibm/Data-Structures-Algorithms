@@ -1,5 +1,5 @@
 /**
-  result = []
+result = []
   def backtrack(Path, Seletion List):
     if meet the End Conditon:
         result.add(Path)
@@ -10,29 +10,34 @@
         backtrack(Path, Seletion List)
         deselect
 **/
+
 // 1. Combination
 import java.util.*;
 
 class Main {
+  
+  static List<List<Integer>> result = new ArrayList<>();
 
   public static List<List<Integer>> combine(int n, int k) {
-    int[] subArr = new int[k];
-    List<List<Integer>> result = new ArrayList<>();
-    backtracking(0, 0, n, k, subArr, result);
+    if (k <= 0 || n <= 0) return result;
+    List<Integer> track = new ArrayList<>();
+    backtrack(n, k, 1, track);
     return result;
   }
 
-  private static void backtracking(int i, int count, int n, int k, int[] subArr, List<List<Integer>> result) {
-    if (k == 0) {
+  private static void backtrack(int n, int k, int start, List<Integer> track) {
+    if (k == track.size()) {
       List<Integer> subList = new ArrayList<>();
-      for (int a : subArr) subList.add(a);
+      for (int a : track) subList.add(a);
       result.add(subList);
-    } else {
-      for (int j = i + 1; j <= n; j++) {
-        subArr[count] = j;
-        backtracking(j, count + 1, n, k - 1, subArr, result);
-      }
+    } 
+    
+    for (int i = start; i <= n; i++) {
+      track.add(i);
+      backtrack(n, k, i + 1, track);
+      track.remove(track.size() - 1);
     }
+    
   }
   
   public static void main(String[] args) {
@@ -42,4 +47,3 @@ class Main {
     System.out.println(result);
   }
 }
-
