@@ -1,28 +1,32 @@
-'''
-  memo = {}
-  def memoization(i, memo):
-   if meet the End Conditon:
-     return
-   if i in memo:
-     return memo[i]
-   memo[i] = recur memoization(i , memo)
-'''
+class CoinChange(object):
+  def __init__(self):
+    self.memo = {0: 0}
+  
+  def coinChange(self, coins, amount):
+    coins.sort()
+    minCoins = self.getMinCoins(coins, amount)
+    
+    if minCoins == float('inf'):
+      return -1
+    
+    return minCoins
+      
+  def getMinCoins(self, coins, amount):
+    if amount in self.memo:
+      return self.memo[amount]
+    
+    minCoins = float('inf')
+    
+    for c in coins:
+      if amount - c <  0: 
+        break
+          
+      numCoins = self.getMinCoins(coins, amount - c) + 1
+      minCoins = min(numCoins, minCoins)
 
-def fib(N):
-  cache = {}
-  def recur_fib(N):
-    if N in cache:
-      return cache[N]
+    self.memo[amount] = minCoins
+    
+    return minCoins
 
-    if N < 2:
-      result = N
-    else:
-      result = recur_fib(N-1) + recur_fib(N-2)
-
-    # put result in cache for later reference.
-    cache[N] = result
-    return result
-
-  return recur_fib(N)
-
-print(fib(5))
+coinChange = CoinChange()
+print(coinChange.getMinCoins([1,2,5], 11))
