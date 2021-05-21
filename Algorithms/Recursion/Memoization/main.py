@@ -1,3 +1,13 @@
+'''
+  memo = {}
+  def memoization(i, memo):
+   if meet the End Conditon:
+     return
+   if i in memo:
+     return memo[i]
+   memo[i] = recur memoization(i , memo)
+'''
+
 def fib(N):
   cache = {}
   def recur_fib(N):
