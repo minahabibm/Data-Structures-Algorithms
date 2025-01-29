@@ -3,7 +3,7 @@
 
 class Main {
   public static void main(String[] args) {    
-    System.out.print("Data Structures!");
+    System.out.println("Data Structures!");
     // new HashTable_().main(args);
     // new LinkedList_().main(args);
     // new Queue_().main(args);
@@ -17,7 +17,7 @@ class Main {
     // new BinaryIndexedTree().main(args);
     // new Trie().main(args);
 
-    System.out.print("\nAlgorithms!");
+    System.out.println("Algorithms!");
     // new BubbleSort().main(args);
     // new BucketSort().main(args);
     // new CountSort().main(args);
