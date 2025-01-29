@@ -1,3 +1,5 @@
+package Algorithms.Graphs.Shortest_paths;
+
 /** Dijkstra's Algorithm
 *
 * @SEE https://www.programiz.com/dsa/dijkstra-algorithm
@@ -23,6 +25,7 @@
 *       previous[V] <- U
 * return distance[], previous[]
 */
+
 import Data_Structure.NonLinear_DataStructure_Graphs.Graph.*;
 import java.util.*;
 

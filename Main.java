@@ -1,5 +1,5 @@
 // import Data_Structure.NonLinear_DataStructure_Graphs.Graph.*;
-// import Algorithms.Graphs.Graph_traversal.Breadth_First_Search.*;
+import Algorithms.Graphs.Shortest_paths.Dijkstra;
 
 class Main {
   public static void main(String[] args) {    
@@ -38,7 +38,7 @@ class Main {
     
     // new BreadthFirstSearch().main(args);
     // new DepthFirstSearch().main(args);
-    // new Dijkstra().main(args);
+    new Dijkstra().main(args);
     // new Bellman_Ford().main(args);
     // new Floyd_warshall().main(args);
     // new Kruskal().main(args);

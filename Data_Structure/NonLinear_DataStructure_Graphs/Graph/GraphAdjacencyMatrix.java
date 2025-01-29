@@ -1,6 +1,10 @@
+package Data_Structure.NonLinear_DataStructure_Graphs.Graph;
+
 // Matrices List
 // Weighted-Undirected Edge Graph
+
 import java.util.*; 
+import Data_Structure.NonLinear_DataStructure_Graphs.Graph.GraphAdjacencyMatrix;
 
 public class GraphAdjacencyMatrix {
 
