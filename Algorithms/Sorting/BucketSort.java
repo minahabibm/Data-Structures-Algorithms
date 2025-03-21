@@ -4,31 +4,32 @@ import java.util.Arrays;
 
 public class BucketSort {
   
-  public static void bucketSort(float[] arr, int n) {
-    if (n <= 0)
-      return;
+  public static void bucketSort(float[] arr) {
+    int n = arr.length;
+    if (n <= 0) return;
     
-    @SuppressWarnings("unchecked")
-    ArrayList<Float>[] bucket = new ArrayList[n];
+    ArrayList<Float>[] buckets = new ArrayList[n];
     // Create empty buckets
     for (int i = 0; i < n; i++)
-      bucket[i] = new ArrayList<Float>();
+      buckets[i] = new ArrayList<Float>();
 
     // Add elements into the buckets
     for (int i = 0; i < n; i++) {
       int bucketIndex = (int) arr[i] * n;
-      bucket[bucketIndex].add(arr[i]);
+      buckets[bucketIndex].add(arr[i]);
     }
 
     // Sort the elements of each bucket
     for (int i = 0; i < n; i++) 
-      Collections.sort((bucket[i]));
+      Collections.sort((buckets[i]));
 
     // Get the sorted array
     int index = 0;
-    for (int i = 0; i < n; i++) 
-      for (int j = 0, size = bucket[i].size(); j < size; j++) 
-        arr[index++] = bucket[i].get(j);   
+    for (ArrayList<Float> bucket : buckets) {
+      for (float num : bucket) {
+        arr[index++] = num;
+      }
+    }  
   }
 
   // Driver code
@@ -37,7 +38,7 @@ public class BucketSort {
     float[] arr = { 
       (float) 0.42, (float) 0.32, (float) 0.33, (float) 0.52, (float) 0.37, (float) 0.47, (float) 0.51 
     };
-    bucketSort(arr, 7);
+    bucketSort(arr);
     System.out.println(Arrays.toString(arr)); 
   }
 

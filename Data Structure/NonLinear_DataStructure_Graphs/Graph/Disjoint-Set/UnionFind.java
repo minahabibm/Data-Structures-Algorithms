@@ -12,7 +12,7 @@ class Subset {
     this.parent = v;
     this.rank = rank;
   }
- };
+};
 class DisjointUnionSetsGraph {
   Subset[] subsets;
 
@@ -36,7 +36,7 @@ class DisjointUnionSetsGraph {
       subsets[i].parent = Find(subsets, subsets[i].parent);
     return subsets[i].parent;
   }
- 
+
   // A function that does union of two sets of x and y (uses union by rank)
   void Union(Subset[] subsets, int x, int y) {
     int xroot = Find(subsets, x);
@@ -124,6 +124,37 @@ class DisjointSetUnion{
 }
 
 public class UnionFind {
+  private int[] root;
+  private int[] rank;
+
+  UnionFind(int n){
+    root = new int[n];
+    rank = new int[n];
+    for(int i=0;i<n;i++)
+      root[i] = i;
+  }
+
+  // Path Compression
+  public int find(int node){
+    if(root[node] == node) return node;
+    return root[node] = find(root[node]);
+  };
+
+  // Union by rank
+  public void union(int u,  int v){
+    u = find(u); 
+    v = find(v);
+    if(u == v) return;
+    if(rank[u] > rank[v]) {
+      root[v] = u;
+    } else if(rank[u] < rank[v]){
+      root[u] = v;
+    } else {
+      root[v] = u;
+      rank[u]++;
+    } 
+  };
+
   public static void main(String[] args) {
     System.out.println("\nDisjoint Union-find set Graph");
     new DisjointUnionSetsGraph().main(args);
