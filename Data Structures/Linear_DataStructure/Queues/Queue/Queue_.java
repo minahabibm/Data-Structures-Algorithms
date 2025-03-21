@@ -1,11 +1,12 @@
-class Queue {
+class Queue_ {
   private int[] arr;      
   private int front;      
   private int rear;       
   private int capacity;   
   private int count;      
 
-  Queue(int size) {
+  Queue_() {}
+  Queue_(int size) {
     arr = new int[size];
     capacity = size;
     front = 0;
@@ -57,11 +58,9 @@ class Queue {
   public Boolean isFull() {
     return (size() == capacity);
   }
-}
  
-class Main{
   public static void main (String[] args) {
-    Queue q = new Queue(5);
+    Queue_ q = new Queue_(5);
 
     q.enqueue(1);
     q.enqueue(2);
