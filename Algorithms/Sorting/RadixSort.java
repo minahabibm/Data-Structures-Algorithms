@@ -1,19 +1,21 @@
 import java.util.Arrays;
 
 class RadixSort {
+
+  // Function to get the largest element from an array
+  static int getMax(int array[]) {
+    int max = array[0], n = array.length;
+    for (int i = 1; i < n; i++)
+      if (array[i] > max)
+        max = array[i];
+    return max;
+  }
+
   // Using counting sort to sort the elements in the basis of significant places
   static void countingSort(int array[], int place) {
     int size = array.length;
-    int[] output = new int[size + 1];
-    int max = array[0];
-    for (int i = 1; i < size; i++) {
-      if (array[i] > max)
-        max = array[i];
-    }
-    int[] count = new int[max + 1];
-
-    for (int i = 0; i < max; ++i)
-      count[i] = 0;
+    int[] output = new int[size];
+    int[] count = new int[10];
 
     // Calculate count of elements
     for (int i = 0; i < size; i++)
@@ -25,21 +27,12 @@ class RadixSort {
 
     // Place the elements in sorted order
     for (int i = size - 1; i >= 0; i--) {
-      output[count[(array[i] / place) % 10] - 1] = array[i];
-      count[(array[i] / place) % 10]--;
+      int index = (array[i] / place) % 10;
+      output[count[index] - 1] = array[i];
+      count[index]--;
     }
-
-    for (int i = 0; i < size; i++)
-      array[i] = output[i];
-  }
-
-  // Function to get the largest element from an array
-  static int getMax(int array[]) {
-    int max = array[0], n = array.length;
-    for (int i = 1; i < n; i++)
-      if (array[i] > max)
-        max = array[i];
-    return max;
+    
+    System.arraycopy(output, 0, array, 0, size);
   }
 
   // Main function to implement radix sort
