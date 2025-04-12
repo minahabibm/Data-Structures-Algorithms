@@ -20,7 +20,7 @@ public class BinaryIndexedTree{
     // Traverse all ancestors and add 'val'
     while(idx <= this.size) {
       this.BITree[idx] += delta;                 // Add 'val' to current node of BIT Tree
-      idx += (idx & -idx);                       // Update index to that of parent in update View
+      idx += (idx & -idx);                       // Update index to that of parent in update View, isolates the least significant bit (LSB) that is set to 1 in the binary representation of idx
     }
   };
   
