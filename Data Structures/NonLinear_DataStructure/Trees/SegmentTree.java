@@ -34,6 +34,25 @@ class SegmentTree {
         }
     }
 
+    public int query(int left, int right) {
+        return query(0, 0, size - 1, left, right);
+    }
+    private int query(int node, int start, int end, int left, int right) {
+        if (right < start || end < left) 
+            return 0; 
+        
+        if (left <= start && end <= right)
+            return tree[node];
+        
+        int mid = (start + end) / 2;
+        int leftIdx = 2 * node + 1;
+        int rightIdx = 2 * node + 2;
+        int leftQuery = query(leftIdx, start, mid, left, right);
+        int rightQuery = query(rightIdx, mid+1, end, left, right);
+        return leftQuery + rightQuery;
+        // return Math.max(leftQuery, rightQuery);   // For min/max segment tree
+    }
+
     public void update(int index, int value) {
         update(0, 0, size - 1, index, value);
     }
@@ -53,24 +72,7 @@ class SegmentTree {
         }
     }
 
-    public int query(int left, int right) {
-        return query(0, 0, size - 1, left, right);
-    }
-    private int query(int node, int start, int end, int left, int right) {
-        if (right < start || end < left) 
-            return 0; 
-        
-        if (left <= start && end <= right)
-            return tree[node];
-        
-        int mid = (start + end) / 2;
-        int leftIdx = 2 * node + 1;
-        int rightIdx = 2 * node + 2;
-        int leftQuery = query(leftIdx, start, mid, left, right);
-        int rightQuery = query(rightIdx, mid+1, end, left, right);
-        return leftQuery + rightQuery;
-        // return Math.max(leftQuery, rightQuery);   // For min/max segment tree
-    }
+    
 
     public void printTree() {
         System.out.println("Segment Tree: " + Arrays.toString(tree));

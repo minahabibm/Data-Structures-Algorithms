@@ -35,17 +35,26 @@ public class Trie {
     TrieNode current = root;
     for(int i=0;i<word.length();i++){
       char c = word.charAt(i);
-      if(current.triNode.containsKey(c)){
+      if(current.triNode.containsKey(c))
         current = current.triNode.get(c);
-      } else {
+      else 
         return false;
-      }
     }
-    if(current.isEndOfWord==true) {
+    if(current.isEndOfWord==true) 
       return true;
-    }
+    
     return false;
   }
+
+  // public boolean startsWith(String prefix) {
+  //   TrieNode currNode = trieNode;
+  //   for (char ch : prefix.toCharArray()) {
+  //       if (currNode.nodes[ch - 'a'] == null)
+  //           return false;
+  //       currNode = currNode.nodes[ch - 'a'];
+  //   }
+  //   return true;
+  // }
 
   public void delete(String word){ delete(root, word, 0);}
   private boolean delete(TrieNode current, String word, int index) {
