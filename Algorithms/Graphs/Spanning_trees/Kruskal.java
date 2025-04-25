@@ -1,19 +1,29 @@
 /** Kruskal's Algorithm
-*
-* @SEE https://www.programiz.com/dsa/kruskal-algorithm
-* @SEE https://www.tutorialspoint.com/data_structures_algorithms/spanning_tree.htm
-* @SEE https://www.geeksforgeeks.org/kruskals-minimum-spanning-tree-algorithm-greedy-algo-2/
-*
-* KRUSKAL(G):
-* A = ∅
-* For each vertex v ∈ G.V:
-*    MAKE-SET(v)
-* For each edge (u, v) ∈ G.E ordered by increasing order by weight(u, v):
-*    if FIND-SET(u) ≠ FIND-SET(v):       
-*    A = A ∪ {(u, v)}
-*    UNION(u, v)
-*  return A
-*/
+ * 
+ * A minimum spanning tree (MST) or minimum weight spanning tree is a subset of the edges of a connected, edge-weighted undirected graph that connects all the vertices together, without any cycles and with the minimum possible total edge weight.
+ * 
+ * @SEE https://www.programiz.com/dsa/kruskal-algorithm
+ * @SEE https://www.tutorialspoint.com/data_structures_algorithms/spanning_tree.htm
+ * @SEE https://www.geeksforgeeks.org/kruskals-minimum-spanning-tree-algorithm-greedy-algo-2/
+ *
+ * Kruskal's algorithm is a greedy algorithm that finds a minimum spanning tree for a connected weighted graph.
+ * The algorithm works by sorting the edges of the graph in non-decreasing order of their weight.  
+ * It then picks the smallest edge and checks if it forms a cycle with the spanning tree formed so far. Uses Union-Find (Disjoint Set) to detect cycles.
+ * If it doesn't, it adds it to the spanning tree. This process is repeated until there are (V-1) edges in the spanning tree. 
+ *
+ * T = O(E log E);
+ * U = O(E);
+ *  
+ * KRUSKAL(G):
+ * A = ∅
+ * For each vertex v ∈ G.V:
+ *    MAKE-SET(v)
+ * For each edge (u, v) ∈ G.E ordered by increasing order by weight(u, v):
+ *    if FIND-SET(u) ≠ FIND-SET(v):       
+ *    A = A ∪ {(u, v)}
+ *    UNION(u, v)
+ *  return A
+ */
 import java.util.*;
 import Data_Structure.NonLinear_DataStructure_Graphs.Graph.*;
 

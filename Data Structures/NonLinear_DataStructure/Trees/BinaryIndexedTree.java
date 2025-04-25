@@ -3,39 +3,34 @@
 // Find the sum of a prefix of length k.  (This is called a range sum query)
 
 public class BinaryIndexedTree{
-  final static int MAX = 1000;
-  static int BITree[] = new int[MAX]; 
+  private int size;
+  private int[] BITree;
   
   BinaryIndexedTree(){};
 
-  BinaryIndexedTree(int arr[]){
-    // Initialize BITree[] as 0
-    for(int i=1; i <= arr.length; i++)
-      BITree[i] = 0;
-    // Store the actual values in BITree[] using update()
-    for(int i = 0; i < arr.length; i++)
-      update(i, arr[i]);
-  };
+  BinaryIndexedTree(int inputArray[]){
+    this.size = inputArray.length;  
+    this.BITree = new int[this.size + 1];
+    for(int i = 0; i < this.size; i++)
+      update(i, inputArray[i]);
+  }
 
   public void update(int index, int delta) {
-    // index in BITree[] is 1 more than the index in arr[]
-    index = index + 1;
-  
+    int idx = index + 1;                         // index in BITree[] is 1 more than the index in arr[]
     // Traverse all ancestors and add 'val'
-    while(index <= BITree.length) {
-      BITree[index] += delta;      // Add 'val' to current node of BIT Tree
-      index += index & (-index);  // Update index to that of parent in update View
+    while(idx <= this.size) {
+      this.BITree[idx] += delta;                 // Add 'val' to current node of BIT Tree
+      idx += (idx & -idx);                       // Update index to that of parent in update View, isolates the least significant bit (LSB) that is set to 1 in the binary representation of idx
     }
   };
   
   public int query(int index) {
-    int sum = 0;         // Initialize result
-    index = index + 1;   // index in BITree[] is 1 more than the index in arr[]
-  
+    int sum = 0;                                // Initialize result
+    int idx = index + 1;                        // index in BITree[] is 1 more than the index in arr[]
     // Traverse ancestors of BITree[index]
-    while(index>0) {
-      sum += BITree[index];       // Add current element of BITree to sum
-      index -= index & (-index);  // Move index to parent node in getSum View
+    while(idx > 0) {
+      sum += this.BITree[idx];                  // Add current element of BITree to sum
+      idx -= (idx & -idx);                      // Move index to parent node in getSum View
     }
     return sum;
   };
