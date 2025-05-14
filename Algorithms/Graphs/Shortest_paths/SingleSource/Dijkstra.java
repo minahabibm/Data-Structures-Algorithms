@@ -23,46 +23,41 @@
 *       previous[V] <- U
 * return distance[], previous[]
 */
-import Data_Structure.NonLinear_DataStructure_Graphs.Graph.*;
+import data_structures.nonlinear_datastructure.graphs.*;
 import java.util.*;
 
 public class Dijkstra {
 
   public static void dijkstra(GraphAdjacencyMatrix graph, int start_vertex) {
     int count = graph.getSize();
-    
     int[] distances = new int[count];
-    for (int i = 0; i < count; i++) 
-      distances[i] = Integer.MAX_VALUE;
+    boolean[] visited = new boolean[count];
+    PriorityQueue<int[]>  pqueue = new PriorityQueue<int[]>((x,y) -> x[1] - y[1]); // 0->vertex, 1->weight 
+
+    Arrays.fill(distances, Integer.MAX_VALUE);
     distances[start_vertex] = 0;
     
-    PriorityQueue<int[]>  pqueue = new PriorityQueue<int[]>((x,y) -> x[1] - y[1]); // 0->vertex, 1->weight 
     pqueue.add(new int[]{start_vertex, 0});
-
     while(!pqueue.isEmpty()) {
-      int[] nodeArr = pqueue.poll();
-      int current_vertex  = nodeArr[0];
-      int weight = nodeArr[1];
-      // graph.visited.append(current_vertex)
+      int[] current = pqueue.poll();
+      int currentVertex = current[0];
+      int currentDistance = current[1];
+
+      if (visited[currentVertex]) continue;
+      visited[currentVertex] = true;
 
       for(int neighbor = 0; neighbor < count; neighbor++) {
-        if(graph.isEdge(current_vertex, neighbor)){
-          int dist = graph.getEdge(current_vertex, neighbor);
-          // if neighbor not in graph.visited:
-          int old_cost = distances[neighbor];
-          int new_cost = distances[current_vertex] + dist;
-          if (new_cost < old_cost){
-            pqueue.add(new int[]{neighbor, new_cost});
-            distances[neighbor] = new_cost;
+        if(graph.isEdge(currentVertex, neighbor)){
+          int edgeWeight = graph.getEdge(currentVertex, neighbor);
+          int newDistance = currentDistance + edgeWeight;
+          if (newDistance < distances[neighbor]) {
+            distances[neighbor] = newDistance;
+            pqueue.add(new int[]{neighbor, newDistance});
           }
         }
       }
-
     }
-
     printSolution(distances, count, start_vertex);
-    // return distance;
-    
   }
   
   public static void dijkstra_(int[][] graph, int source) {
